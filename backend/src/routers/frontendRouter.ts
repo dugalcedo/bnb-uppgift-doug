@@ -21,6 +21,9 @@ const FRONTEND_HTML = getFrontendHtml();
 
 const frontendRouter = new Hono()
 
+// Serve static the frontend/dist folder so the React app can load assets
+frontendRouter.use('/*', serveStatic({ root: './frontend/dist' }))
+
 // Re-route all frontend routes to the React frontend
 for (const ROUTE of FRONTEND_ROUTES) {
     frontendRouter.get(ROUTE, (c) => {
@@ -41,7 +44,5 @@ for (const ROUTE of FRONTEND_ROUTES) {
     })
 }
 
-// Serve static the frontend/dist folder so the React app can load assets
-frontendRouter.use('/*', serveStatic({ root: './frontend/dist' }))
 
 export default frontendRouter
