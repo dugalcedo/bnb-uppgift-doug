@@ -1,0 +1,29 @@
+{
+  "name": "bnb-uppgift-doug",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "pnpx concurrently --names back,front 'pnpx tsx --watch backend/src/server.ts' 'cd frontend && pnpm run dev'",
+    "dev:npm": "npx concurrently --names back,front 'npx tsx --watch backend/src/server.ts' 'cd frontend && npm run dev'",
+    "build": "pnpm i && cd frontend && pnpm i && pnpm run build && cd ../backend && pnpm --package=typescript dlx tsc",
+    "build:npm": "npm i && cd frontend && npm i && npm run build && cd ../backend && tsc",
+    "start": "node backend/dist/server"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.7.0",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.6"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.5",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "hono": "^4.9.10",
+    "jsonwebtoken": "^9.0.2",
+    "typescript": "^5.9.3"
+  }
+}

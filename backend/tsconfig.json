@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "checkJs": false,
+        "rootDir": "src",
+        "outDir": "dist",
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "nodenext",
+        "module": "nodenext"
+    }
+}
