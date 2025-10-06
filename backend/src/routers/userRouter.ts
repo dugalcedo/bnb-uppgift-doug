@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { User } from "../database/db.js";
-import { setCookie } from "hono/cookie";
 import { createToken, CustomError, getRequiredUserData } from "../util.js";
 import bcrypt from 'bcryptjs'
 
@@ -17,8 +16,6 @@ userRouter.post("/signup", async (c) => {
         isAdmin: false
     })
 
-    setCookie(c, 'dugbnb-token', createToken(newUser))
-
     c.status(201)
     return c.json({
         message: "User created",
@@ -26,7 +23,8 @@ userRouter.post("/signup", async (c) => {
             _id: newUser._id,
             name: newUser.name,
             email: newUser.email
-        }
+        },
+        token: createToken(newUser)
     })
 
 
@@ -44,15 +42,14 @@ userRouter.post("/login", async (c) => {
 
     if (!validPassword) throw new CustomError({ status: 401, message: "Invalid password" });
 
-    setCookie(c, 'dugbnb-token', createToken(foundUser))
-
     return c.json({
         message: "Logged in",
         data: {
             _id: foundUser._id,
             name: foundUser.name,
             email: foundUser.email
-        }
+        },
+        token: createToken(foundUser)
     })
 
 })

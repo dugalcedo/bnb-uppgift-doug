@@ -20,6 +20,7 @@ app.use(cors())
 // Logger
 app.use(async (c, next) => {
     console.log(`NEW REQUEST [${c.req.method} ${c.req.url}]`)
+    console.log(`TOKEN: ${c.req.header('x-token')}`)
     await next()
 })
 
@@ -28,8 +29,7 @@ app.use(async (c, next) => {
 handleErrors(app)
 
 app.route('/api/test', testRouter);
-app.route('/api/user', userRouter)
-app.route('/', frontendRouter);
+app.route('/api/user', userRouter);
 
 // START
 (async () => {
@@ -45,6 +45,8 @@ app.route('/', frontendRouter);
             return c.json({ message: "The server failed connecting to the database." })
         }
     })
+
+    app.route('/', frontendRouter);
 
     console.log(`BACKEND: http://localhost:${PORT}/test`)
     console.log(`FRONTEND: http://localhost:5173`)

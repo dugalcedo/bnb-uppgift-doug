@@ -9,7 +9,8 @@ export const backendFetch = async <
         ...(init||{}),
         headers: {
             ...(init?.headers||{}),
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "x-token": localStorage.getItem('dugbnb-token') || ""
         }
     }
 
@@ -17,13 +18,14 @@ export const backendFetch = async <
     if (body) reqInit.body = JSON.stringify(body);
 
     const res = await fetch(BACKEND_ROOT + path, reqInit)
-    let data: { message: string, status?: number, data?: ResDataT };
+    let data: { message: string, status?: number, data?: ResDataT, token?: string };
     const text = await res.text()
 
     try {
         data = JSON.parse(text)
     } catch (error) {
-        console.error(error)
+        console.error(`Failed parsing JSON [${path}]`, text)
+        console.log(res)
         data = { message: text }
     }
 

@@ -27,7 +27,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         }
 
         loadData()
-    })
+    }, [])
 
     const ctx: AppContext = {
         databaseConnected,
@@ -49,7 +49,7 @@ export const AppContextDebug = () => {
 // helpers
 
 async function testDatabaseConnection() {
-    const { res, data } = await backendFetch("/api/test/db")
+    const { res } = await backendFetch("/api/test/db")
     if (!res.ok) return false;
     return true;
 }

@@ -32,3 +32,27 @@ body, button, input, select, option, textarea {
     margin-right: auto;
     max-width: calc(100% - 1rem);
 }
+
+form .field {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 8px;
+    position: relative;
+
+    & .error {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        color: maroon;
+        z-index: 10;
+        font-size: .7rem;
+        font-style: italic;
+        pointer-events: none;
+        user-select: none;
+        opacity: .8;
+    }
+}
+
+.hidden {
+    display: none !important;
+}

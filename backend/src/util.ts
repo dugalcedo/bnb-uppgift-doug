@@ -22,14 +22,14 @@ export const getRequiredUserData = async (
     errorStatus: ContentfulStatusCode = 401, 
     errorMessage: string = "You must be logged in"
 ): Promise<UserType> => {
-    const cookie = getCookie(c, 'dugbnb-token')
+    const token = c.req.header('x-token')
 
-    if (!cookie) throw new HTTPException(errorStatus, { message: errorMessage });
+    if (!token) throw new HTTPException(errorStatus, { message: errorMessage });
 
     // try parsing token
     let parsedToken: jwt.JwtPayload | string;
     try {
-        parsedToken = jwt.verify(cookie, JWT_SECRET) // This can throw an error if the cookie is not a valid jwt.
+        parsedToken = jwt.verify(token, JWT_SECRET) // This can throw an error if the cookie is not a valid jwt.
         if (typeof parsedToken === 'string') throw null; // But the parsedToken can also be a string, which is invalid.
     } catch (error) {
         throw new HTTPException(errorStatus, { message: errorMessage });
