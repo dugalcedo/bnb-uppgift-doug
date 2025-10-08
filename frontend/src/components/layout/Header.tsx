@@ -18,7 +18,7 @@ function Header() {
             <nav>
                 <div className="responsive">
                     <Link to="/">Home</Link>
-                    <Link to="/search">Search</Link>
+                    <Link to="/browse">Browse</Link>
                     {ctx.user ? ( // Logged in
                         <>
                             <button onClick={logOut}>

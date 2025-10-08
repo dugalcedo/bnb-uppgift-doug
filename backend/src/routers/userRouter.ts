@@ -54,7 +54,7 @@ userRouter.post("/login", async (c) => {
 
 })
 
-// Verify cookie
+// Verify token
 userRouter.get("/verify", async (c) =>{
     const user = await getRequiredUserData(c)
 

@@ -3,7 +3,11 @@ import { Schema, model, type HydratedDocument } from "mongoose";
 interface MongoPropertyInterface {
     name: string
     description: string
-    location: string
+    city: string
+    state: string
+    country: string
+    latitude: number
+    longitude: number
     pricePerNight: number
     availability: boolean
     image: string
@@ -21,10 +25,28 @@ const propertySchema = new Schema<MongoPropertyInterface>({
         required: true,
         length: [10, 300]
     },
-    location: {
+    city: {
         type: String,
         required: true,
         length: [3, 100]
+    },
+    state: {
+        type: String,
+        required: true,
+        length: [3, 100]
+    },
+    country: {
+        type: String,
+        required: true,
+        length: [3, 100]
+    },
+    latitude: {
+        type: Number,
+        required: true
+    },
+    longitude: {
+        type: Number,
+        required: true
     },
     pricePerNight: {
         type: Number,
@@ -39,7 +61,7 @@ const propertySchema = new Schema<MongoPropertyInterface>({
     },
     image: {
         type: String,
-        required: true
+        required: false
     }
 })
 

@@ -11,6 +11,8 @@ import { handleErrors } from './util.js'
 import testRouter from './routers/testRouter.js';
 import frontendRouter from "./routers/frontendRouter.js"
 import userRouter from './routers/userRouter.js';
+import propertyRouter from './routers/propertyRouter.js';
+import bookingRouter from './routers/bookingRouter.js';
 
 const app = new Hono()
 
@@ -30,6 +32,8 @@ handleErrors(app)
 
 app.route('/api/test', testRouter);
 app.route('/api/user', userRouter);
+app.route('/api/property', propertyRouter);
+app.route('/api/booking', bookingRouter);
 
 // START
 (async () => {

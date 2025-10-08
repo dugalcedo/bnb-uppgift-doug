@@ -1,0 +1,90 @@
+[
+  {
+    "name": "1 La Jolla Farms Road",
+    "description": "Stunning cliffside estate with panoramic ocean views. Features infinity pool, private elevator, and chef's kitchen. Full staff including butler and private chef available.",
+    "city": "La Jolla",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.8674,
+    "longitude": -117.2509,
+    "pricePerNight": 2500,
+    "availability": true
+  },
+  {
+    "name": "500 Prospect Street",
+    "description": "Luxurious penthouse overlooking La Jolla Cove. Floor-to-ceiling windows, private rooftop terrace with hot tub, and premium finishes throughout. Includes valet and concierge services.",
+    "city": "La Jolla",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.8502,
+    "longitude": -117.2731,
+    "pricePerNight": 1800,
+    "availability": true
+  },
+  {
+    "name": "1000 Ocean Boulevard",
+    "description": "Magnificent Coronado waterfront mansion with private beach access. Boasting 180-degree ocean views, home theater, wine cellar, and separate guest house. Includes daily housekeeping.",
+    "city": "Coronado",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.6795,
+    "longitude": -117.1773,
+    "pricePerNight": 3200,
+    "availability": false
+  },
+  {
+    "name": "2500 Del Mar Heights Road",
+    "description": "Architectural masterpiece with sweeping ocean and canyon views. Features smart home technology, professional gym, spa with steam room, and putting green. Private chef available upon request.",
+    "city": "Del Mar",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.9578,
+    "longitude": -117.2401,
+    "pricePerNight": 2100,
+    "availability": true
+  },
+  {
+    "name": "1 Fairbanks Ranch Drive",
+    "description": "Gated estate in exclusive Fairbanks Ranch. Includes tennis court, resort-style pool with cabana, 6-car garage, and separate staff quarters. 24/7 security and concierge services.",
+    "city": "Rancho Santa Fe",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.9846,
+    "longitude": -117.2063,
+    "pricePerNight": 4500,
+    "availability": true
+  },
+  {
+    "name": "800 Silverado Street",
+    "description": "Luxury high-rise condominium with breathtaking bay and city views. Features private balcony, gourmet kitchen with premium appliances, and access to building amenities including pool and fitness center.",
+    "city": "San Diego",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.7178,
+    "longitude": -117.1669,
+    "pricePerNight": 850,
+    "availability": true
+  },
+  {
+    "name": "1500 Torrey Pines Road",
+    "description": "Modern architectural gem with floor-to-ceiling glass walls overlooking Torrey Pines Golf Course. Features indoor-outdoor living, custom lighting, and professional-grade entertainment system.",
+    "city": "La Jolla",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.8904,
+    "longitude": -117.2439,
+    "pricePerNight": 1600,
+    "availability": false
+  },
+  {
+    "name": "1 Beachwalk Way",
+    "description": "Ultra-luxury beachfront compound in Del Mar with direct private access to the sand. Includes multiple living areas, outdoor kitchen, fire pit, and professional sound system. Personal concierge arranges all activities.",
+    "city": "Del Mar",
+    "state": "California",
+    "country": "USA",
+    "latitude": 32.9735,
+    "longitude": -117.2698,
+    "pricePerNight": 2800,
+    "availability": true
+  }
+]

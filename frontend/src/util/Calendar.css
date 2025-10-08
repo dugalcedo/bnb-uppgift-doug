@@ -1,0 +1,51 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    & > .date {
+        border-radius: 0;
+        border: 2px solid gray;
+        position: relative;
+
+        &.non-month {
+            opacity: 0.5;
+        }
+
+        &.selected {
+            border: 2px solid lime;
+            background-color: lime;
+        }
+
+        &.checkout {
+            background-color: magenta;
+        }
+
+        & > .booked {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            background-color: maroon;
+            color: white;
+            font-size: .8rem;
+            width: 15px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.calendar-date-display {
+    display: flex;
+
+    & > span {
+        flex-grow: 1;
+        text-align: center;
+    }
+}
+
+.dayOfWeek {
+    text-align: center;
+}

@@ -2,7 +2,6 @@ import { Schema, model, type HydratedDocument, Types } from "mongoose";
 
 
 interface MongoBookingInterface {
-    name: string
     checkInDate: Date
     checkOutDate: Date
     userId: Types.ObjectId
@@ -13,12 +12,6 @@ interface MongoBookingInterface {
 }
 
 const bookingSchema = new Schema<MongoBookingInterface>({
-    name: {
-        type: String,
-        required: true,
-        unique: true,
-        length: [3, 100]
-    },
     checkInDate: {
         type: Date,
         required: true

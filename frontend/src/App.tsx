@@ -1,12 +1,13 @@
 import Header from "./components/layout/Header.tsx"
-import Test from "./components/test/Test.tsx"
+import Footer from "./components/layout/Footer.tsx"
 import { Routes, Route } from "react-router-dom"
 
 // Pages
 import HomePage from "./pages/HomePage/HomePage.tsx"
 import AuthPage from "./pages/AuthPage/AuthPage.tsx"
-import SearchPage from "./pages/SearchPage/SearchPage.tsx"
+import BrowsePage from "./pages/BrowsePage/BrowsePage.tsx"
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.tsx"
+import PropertyPage from "./pages/PropertyPage/PropertyPage.tsx"
 
 function App() {
 
@@ -17,10 +18,12 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<AuthPage />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/browse" element={<BrowsePage />} />
+          <Route path="/property/:id" element={<PropertyPage />} />
           <Route path="/:fel" element={<NotFoundPage />} />
         </Routes>
       </main>
+      <Footer />
     </>
   )
 }

@@ -1,0 +1,16 @@
+.property-page .property {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    & > .image {
+        & img {
+            width: 100%;
+        }
+    }
+}
+
+.booking-form-wrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 4px;
+}
+

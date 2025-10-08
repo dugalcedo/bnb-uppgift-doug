@@ -1,0 +1,42 @@
+.browse-results {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.browse-result {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background-color: #333;
+    border-radius: 1rem;
+    min-height: 200px;
+    overflow: hidden;
+    user-select: none;
+
+    color: white;
+    text-decoration: none;
+
+    & > .image {
+        overflow: hidden;
+
+        & > img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    & > .info {
+        padding: .5rem;
+    }
+}
+
+.browse-page-pagination {
+    .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        gap: 1rem;
+    }
+}
