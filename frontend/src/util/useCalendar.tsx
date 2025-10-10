@@ -143,6 +143,10 @@ export default function useCalendar(init: CalendarInit) {
 
     return {
         Component,
+        startDate,
+        startDateD,
+        endDate,
+        endDateD,
 
         // Derived values
         get selectionContainsBooked() {

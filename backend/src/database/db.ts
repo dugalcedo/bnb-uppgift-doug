@@ -30,9 +30,7 @@ export async function connectToDb() {
 }
 
 async function seed() {
-    const propertyId = "68e4e0b6f127456676cdb4bc"
-    const userId = "68e3fad91bffd0fd52447d82"
-    const checkInDate = new Date('2025-10-01')
-    const checkOutDate = new Date('2025-10-31')
-    await Booking.create({ propertyId, userId, checkInDate, checkOutDate })
+    const doug = await User.findOne({ name: "doug" })
+    doug.isAdmin = true
+    await doug.save()
 }

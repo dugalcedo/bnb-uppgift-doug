@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { User } from "../database/db.js";
-import { createToken, CustomError, getRequiredUserData } from "../util.js";
+import { createToken, CustomError, getRequiredUserData, getUserDocuments } from "../util.js";
 import bcrypt from 'bcryptjs'
 
 const userRouter = new Hono()
@@ -22,7 +22,8 @@ userRouter.post("/signup", async (c) => {
         data: {
             _id: newUser._id,
             name: newUser.name,
-            email: newUser.email
+            email: newUser.email,
+            isAdmin: newUser.isAdmin
         },
         token: createToken(newUser)
     })
@@ -47,7 +48,8 @@ userRouter.post("/login", async (c) => {
         data: {
             _id: foundUser._id,
             name: foundUser.name,
-            email: foundUser.email
+            email: foundUser.email,
+            isAdmin: foundUser.isAdmin
         },
         token: createToken(foundUser)
     })
@@ -57,13 +59,16 @@ userRouter.post("/login", async (c) => {
 // Verify token
 userRouter.get("/verify", async (c) =>{
     const user = await getRequiredUserData(c)
+    const docs = await getUserDocuments(user._id.toString())
 
     return c.json({
         message: "User data retrieved",
         data: {
             _id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            isAdmin: user.isAdmin,
+            ...docs
         }
     })
 })

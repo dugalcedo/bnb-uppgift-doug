@@ -1,0 +1,29 @@
+#toast {
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    z-index: 900;
+    width: 800px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    padding: 1rem;
+    border-radius: .7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    & .x {
+        border: 0;
+        background-color: transparent;
+        padding: 1rem;
+        font-size: 2rem;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        translate: 0 -50%;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+    }
+}

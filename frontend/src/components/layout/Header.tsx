@@ -21,6 +21,8 @@ function Header() {
                     <Link to="/browse">Browse</Link>
                     {ctx.user ? ( // Logged in
                         <>
+                            <Link to="/profile">Your bookings</Link>
+                            {ctx.user.isAdmin && <Link to="/admin">Admin panel</Link>}
                             <button onClick={logOut}>
                                 Log out
                             </button>      

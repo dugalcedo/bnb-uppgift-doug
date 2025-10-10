@@ -8,6 +8,8 @@ import AuthPage from "./pages/AuthPage/AuthPage.tsx"
 import BrowsePage from "./pages/BrowsePage/BrowsePage.tsx"
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.tsx"
 import PropertyPage from "./pages/PropertyPage/PropertyPage.tsx"
+import ProfilePage from "./pages/ProfilePage/ProfilePage.tsx"
+import AdminPage from "./pages/AdminPage/AdminPage.tsx"
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/browse" element={<BrowsePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/property/:id" element={<PropertyPage />} />
           <Route path="/:fel" element={<NotFoundPage />} />
         </Routes>

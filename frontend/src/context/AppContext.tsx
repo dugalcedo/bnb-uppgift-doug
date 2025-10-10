@@ -20,6 +20,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const [databaseConnected, setDatabaseConnected] = useState<null | boolean>(null)
     const [user, setUser] = useState<User | null>(null)
 
+    console.log({user})
+
     useEffect(() => {
         async function loadData() {
             setDatabaseConnected(await testDatabaseConnection())

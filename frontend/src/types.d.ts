@@ -2,6 +2,10 @@ type User = {
     _id: string
     name: string
     email: string
+    isAdmin: boolean
+    bookings: (Booking & {
+        property: Property
+    })[]
 }
 
 type Property = {
@@ -39,6 +43,13 @@ type BrowseParams = {
     sort: 'name' | 'pricePerNight'
     order: 1 | -1
     showUnavailable: boolean
+}
+
+type BookingQuery = {
+    propertyId: string
+    userId: string
+    checkInDate: string
+    checkOutDate: string
 }
 
 type Booking = {

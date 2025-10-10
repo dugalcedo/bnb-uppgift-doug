@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'; dotenv.config();
 import { Context, Hono } from "hono"
 import { HTTPException } from "hono/http-exception"
-import { User, UserType } from "./database/db.js"
+import { Booking, Property, User, UserType } from "./database/db.js"
 import jwt from 'jsonwebtoken'
 import { ContentfulStatusCode, StatusCode } from 'hono/utils/http-status'
 import { getCookie } from 'hono/cookie';
@@ -40,6 +40,18 @@ export const getRequiredUserData = async (
     if (!user) throw new HTTPException(errorStatus, { message: errorMessage });
 
     return user;
+}
+
+export const getUserDocuments = async (userId: string) => {
+    const bookings = await Booking.find({ userId })
+    const bookingsWithProperties = await Promise.all(bookings.map(async booking => {
+        const property = await Property.findOne({ _id: booking.propertyId })
+        return {
+            ...booking.toJSON(),
+            property: property.toJSON()
+        }
+    }))
+    return { bookings: bookingsWithProperties }
 }
 
 type CustomErrorInit = {
