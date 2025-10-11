@@ -1,10 +1,18 @@
 {
     "compilerOptions": {
-        "checkJs": false,
-        "rootDir": "src",
-        "outDir": "dist",
-        "allowSyntheticDefaultImports": true,
+        "target": "ES2022",
+        "lib": ["ES2022"],
+        "module": "nodenext",
         "moduleResolution": "nodenext",
-        "module": "nodenext"
-    }
+        "outDir": "dist",
+        "rootDir": "src",
+        "checkJs": false,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
 }

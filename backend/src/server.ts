@@ -13,6 +13,7 @@ import frontendRouter from "./routers/frontendRouter.js"
 import userRouter from './routers/userRouter.js';
 import propertyRouter from './routers/propertyRouter.js';
 import bookingRouter from './routers/bookingRouter.js';
+import adminRouter from './routers/adminRouter.js';
 
 const app = new Hono()
 
@@ -34,6 +35,7 @@ app.route('/api/test', testRouter);
 app.route('/api/user', userRouter);
 app.route('/api/property', propertyRouter);
 app.route('/api/booking', bookingRouter);
+app.route('/api/admin', adminRouter);
 
 // START
 (async () => {

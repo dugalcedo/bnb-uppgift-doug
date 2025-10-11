@@ -21,6 +21,8 @@ type Property = {
     availability: boolean
     image: string
     bookings?: Booking[]
+    userId: string
+    user?: User
 }
 
 type PropertyBrowseResult = {

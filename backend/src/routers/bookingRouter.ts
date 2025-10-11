@@ -65,13 +65,9 @@ type DeleteBookingInput = {
 }
 bookingRouter.delete("/", async c => {
     const body: DeleteBookingInput = await c.req.json()
-    const user = await getRequiredUserData(c)
-
-    // Should not be allowed unless the requester is an admin OR they are the user who the booking belongs to.
-    if (
-        !user.isAdmin
-        && (user._id.toString() !== body.userId)
-    ) throw new CustomError({ status: 401, message: "You are not allowed to do this."})
+    await getRequiredUserData(c, {
+        mustHaveUserId: body.userId
+    })
 
     await Booking.deleteOne({ userId: body.userId, _id: body.bookingId })
 

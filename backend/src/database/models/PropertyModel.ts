@@ -1,19 +1,7 @@
-import { Schema, model, type HydratedDocument } from "mongoose";
+import { Schema, Types, model, type HydratedDocument } from "mongoose";
+import { PropertyDocInterface } from "../types/Property.js";
 
-interface MongoPropertyInterface {
-    name: string
-    description: string
-    city: string
-    state: string
-    country: string
-    latitude: number
-    longitude: number
-    pricePerNight: number
-    availability: boolean
-    image: string
-}
-
-const propertySchema = new Schema<MongoPropertyInterface>({
+const propertySchema = new Schema<PropertyDocInterface>({
     name: {
         type: String,
         required: true,
@@ -62,8 +50,12 @@ const propertySchema = new Schema<MongoPropertyInterface>({
     image: {
         type: String,
         required: false
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
     }
 })
 
-export const PropertyModel = model<MongoPropertyInterface>('property', propertySchema, 'properties')
-export type MongoPropertyType = HydratedDocument<MongoPropertyInterface>
+export const PropertyModel = model<PropertyDocInterface>('property', propertySchema, 'properties')

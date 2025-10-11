@@ -4,15 +4,19 @@ import mongoose from 'mongoose'
 import fs from 'fs/promises'
 
 // models
-import { UserModel, type MongoUserType } from './models/UserModel.js';
-import { PropertyModel, type MongoPropertyType } from './models/PropertyModel.js';
-import { BookingModel, type MongoBookingType } from './models/BookingModel.js';
+import { UserModel } from './models/UserModel.js';
+import { PropertyModel } from './models/PropertyModel.js';
+import { BookingModel } from './models/BookingModel.js';
+import { UserType } from './types/User.js';
+import { PropertyType } from './types/Property.js';
+import { BookingType } from './types/Booking.js';
+
 export const User = UserModel
-export type UserType = MongoUserType
+export type { UserType }
 export const Property = PropertyModel
-export type PropertyType = MongoPropertyType
+export type { PropertyType }
 export const Booking = BookingModel
-export type BookingType = MongoBookingType
+export type { BookingType }
 
 export async function connectToDb() {
     if (!MONGO_DB_URI) {
@@ -31,6 +35,11 @@ export async function connectToDb() {
 
 async function seed() {
     const doug = await User.findOne({ name: "doug" })
-    doug.isAdmin = true
-    await doug.save()
+    const properties = await Property.find()
+    await Promise.all(properties.map(async p => {
+        p.userId = doug!._id
+        await p.save()
+    }))
+
+    console.log('done')
 }

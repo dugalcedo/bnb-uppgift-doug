@@ -1,17 +1,7 @@
 import { Schema, model, type HydratedDocument, Types } from "mongoose";
+import { BookingDocInterface } from "../types/Booking.js";
 
-
-interface MongoBookingInterface {
-    checkInDate: Date
-    checkOutDate: Date
-    userId: Types.ObjectId
-    propertyId: Types.ObjectId
-    // virtuals
-    totalPrice: number
-    numberOfNights: number
-}
-
-const bookingSchema = new Schema<MongoBookingInterface>({
+const bookingSchema = new Schema<BookingDocInterface>({
     checkInDate: {
         type: Date,
         required: true
@@ -63,5 +53,4 @@ bookingSchema.virtual('totalPrice').get(async function() {
     return numberOfNights * property.pricePerNight
 })
 
-export const BookingModel = model<MongoBookingInterface>('booking', bookingSchema, 'bookings')
-export type MongoBookingType = HydratedDocument<MongoBookingInterface>
+export const BookingModel = model<BookingDocInterface>('booking', bookingSchema, 'bookings')

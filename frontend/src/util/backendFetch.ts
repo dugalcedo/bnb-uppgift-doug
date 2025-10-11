@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 export const DEV = window.location.href.includes('localhost') || window.location.href.includes('127.1.1');
 export const BACKEND_ROOT = DEV ? 'http://localhost:6392' : '';
 
@@ -30,4 +32,38 @@ export const backendFetch = async <
     }
 
     return { res, data }
+}
+
+export const useBackendFetchOnFirstMount = <
+    BodyT extends Record<string, any>,
+    ResDataT
+>(path: string, init?: RequestInit, body?: BodyT) => {
+    const [res, setRes] = useState<Response>(new Response())
+    const [data, setData] = useState<{ message: string, status?: number, data?: ResDataT, token?: string }>({
+        message: "NOT YET FETCHED"
+    })
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<null | string>(null)
+
+    useEffect(() => {
+        ;(async () => {
+            const { res, data } = await backendFetch<BodyT, ResDataT>(path, init, body)
+            setRes(res)
+            setData(data)
+
+            if (!res.ok) {
+                setError(data.message)
+                return
+            }
+
+            setLoading(false)
+        })();
+    }, [])
+
+    return {
+        res,
+        data,
+        loading,
+        error
+    }
 }

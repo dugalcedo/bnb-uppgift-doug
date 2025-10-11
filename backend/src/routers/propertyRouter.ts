@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { Booking, Property } from "../database/db.js";
-import { CustomError } from "../util.js"
+import { CustomError, getRequiredUserData } from "../util.js"
 
 const propertyRouter = new Hono()
 
@@ -72,10 +72,47 @@ propertyRouter.get("/:id", async (c) => {
 })
 
 
+// Create property
+type CreatePropertyInput = {
+    userId: string
+    name: string
+    description: string
+    city: string
+    state: string
+    country: string
+    latitude: number
+    longitude: number
+    image: string
+}
+propertyRouter.post("/", async c => {
+    const body: CreatePropertyInput = await c.req.json()
+
+    await getRequiredUserData(c, {
+        mustHaveUserId: body.userId
+    })
+
+    const newProperty = await Property.create({
+        userId: body.userId,
+        name: body.name,
+        description: body.description,
+        city: body.city,
+        state: body.state,
+        country: body.state,
+        latitude: body.latitude,
+        longitude: body.longitude,
+        image: body.image
+    })
+
+    return c.json({
+        message: "Property created",
+        data: newProperty.toJSON()
+    })
+})
+
 export default propertyRouter
 
 // helper
-const parseNum = (str: string, def: number) => {
+const parseNum = (str: string | undefined | null, def: number) => {
     if (typeof str !== 'string') return def;
     if (!str.trim()) return def;
     const n = Number(str)
@@ -83,7 +120,7 @@ const parseNum = (str: string, def: number) => {
 }
 
 // helper
-const parseSortOrder = (str: string): 1 | -1 => {
+const parseSortOrder = (str: string | undefined | null): 1 | -1 => {
     const n = parseNum(str, 1)
     return n > 0 ? 1 : -1;
 }

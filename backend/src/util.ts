@@ -19,9 +19,20 @@ export const createToken = (user: UserType) => {
 
 export const getRequiredUserData = async (
     c: Context, 
-    errorStatus: ContentfulStatusCode = 401, 
-    errorMessage: string = "You must be logged in"
+    o?: {
+        errorStatus?: ContentfulStatusCode,
+        errorMessage?: string,
+        mustBeAdmin?: boolean,
+        mustHaveUserId?: string
+    }
 ): Promise<UserType> => {
+    const {
+        errorStatus = 400,
+        errorMessage = "You must be logged in",
+        mustBeAdmin = false,
+        mustHaveUserId = undefined
+    } = o || {};
+
     const token = c.req.header('x-token')
 
     if (!token) throw new HTTPException(errorStatus, { message: errorMessage });
@@ -39,6 +50,12 @@ export const getRequiredUserData = async (
 
     if (!user) throw new HTTPException(errorStatus, { message: errorMessage });
 
+    if (mustBeAdmin && !user.isAdmin) throw new CustomError({ status: 401, message: "Unauthorized" })
+
+    if (!user.isAdmin && mustHaveUserId && (user._id.toString() !== mustHaveUserId)) {
+        throw new CustomError({ status: 401, message: "Unauthorized" })
+    }
+
     return user;
 }
 
@@ -48,7 +65,7 @@ export const getUserDocuments = async (userId: string) => {
         const property = await Property.findOne({ _id: booking.propertyId })
         return {
             ...booking.toJSON(),
-            property: property.toJSON()
+            property: property?.toJSON()
         }
     }))
     return { bookings: bookingsWithProperties }

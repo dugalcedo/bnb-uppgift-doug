@@ -4,11 +4,13 @@ import { backendFetch } from "../util/backendFetch.ts"
 type AppContext = {
     databaseConnected: null | boolean
     user: null | User
+    loading: boolean
 }
 
 const initialAppContext = {
     databaseConnected: null,
-    user: null
+    user: null,
+    loading: true
 }
 
 const Context = createContext<AppContext>(initialAppContext)
@@ -17,6 +19,7 @@ export const useAppContext = () => useContext(Context);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
+    const [loading, setLoading] = useState(true)
     const [databaseConnected, setDatabaseConnected] = useState<null | boolean>(null)
     const [user, setUser] = useState<User | null>(null)
 
@@ -26,6 +29,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         async function loadData() {
             setDatabaseConnected(await testDatabaseConnection())
             setUser(await getUserData())
+            setLoading(false)
         }
 
         loadData()
@@ -33,7 +37,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
     const ctx: AppContext = {
         databaseConnected,
-        user
+        user,
+        loading
     }
 
     return <Context.Provider value={ctx}>{children}</Context.Provider>

@@ -1,15 +1,9 @@
 import { Schema, model, type HydratedDocument } from "mongoose";
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
+import { UserDocInterface } from "../types/User.js";
 
-interface MongoUserInterface {
-    name: string
-    email: string
-    password: string
-    isAdmin: boolean
-}
-
-const userSchema = new Schema<MongoUserInterface>({
+const userSchema = new Schema<UserDocInterface>({
     name: {
         type: String,
         required: true,
@@ -50,5 +44,4 @@ userSchema.pre('save', async function() {
     this.password = await bcrypt.hash(this.password, 5)
 })
 
-export const UserModel = model<MongoUserInterface>('user', userSchema, 'users')
-export type MongoUserType = HydratedDocument<MongoUserInterface>
+export const UserModel = model<UserDocInterface>('user', userSchema, 'users')
