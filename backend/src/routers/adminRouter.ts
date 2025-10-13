@@ -7,7 +7,7 @@ const adminRouter = new Hono()
 // Get admin panel data
 // In the future, pagination should be implemented or the json will be too large
 adminRouter.get("/", async c => {
-    await getRequiredUserData(c, {
+    const admin = await getRequiredUserData(c, {
         mustBeAdmin: true
     })
 
@@ -33,6 +33,7 @@ adminRouter.get("/", async c => {
     return c.json({
         message: "Admin panel data retrieved",
         data: {
+            adminId: admin._id,
             properties: propertiesWithUser,
             bookings: bookingsWithProperties
         }

@@ -64,6 +64,7 @@ export const useBackendFetchOnFirstMount = <
         res,
         data,
         loading,
-        error
+        error,
+        setData
     }
 }

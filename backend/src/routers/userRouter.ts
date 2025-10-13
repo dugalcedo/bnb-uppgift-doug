@@ -39,6 +39,7 @@ userRouter.post("/login", async (c) => {
 
     if (!foundUser) throw new CustomError({ status: 404, message: "User not found" });
 
+    // console.log(body.password, foundUser.password)
     const validPassword = await bcrypt.compare(body.password, foundUser.password);
 
     if (!validPassword) throw new CustomError({ status: 401, message: "Invalid password" });

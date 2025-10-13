@@ -22,11 +22,13 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.19.5",
+    "@types/jaro-winkler": "^0.2.4",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.3",
     "hono": "^4.9.10",
+    "jaro-winkler": "^0.2.8",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.0",
     "typescript": "^5.9.3",

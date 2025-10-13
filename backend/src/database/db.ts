@@ -2,6 +2,7 @@ import dotenv from 'dotenv'; dotenv.config();
 const { MONGO_DB_URI } = process.env;
 import mongoose from 'mongoose'
 import fs from 'fs/promises'
+import bcrypt from 'bcryptjs'
 
 // models
 import { UserModel } from './models/UserModel.js';
@@ -26,6 +27,8 @@ export async function connectToDb() {
     try {
         await mongoose.connect(MONGO_DB_URI)
         console.log("Connected to MongoDB.")
+        const users = await User.find()
+        console.log(users.map(u => u.name))
         // await seed()
         return true
     } catch (error) {
@@ -34,12 +37,10 @@ export async function connectToDb() {
 }
 
 async function seed() {
-    const doug = await User.findOne({ name: "doug" })
-    const properties = await Property.find()
-    await Promise.all(properties.map(async p => {
-        p.userId = doug!._id
-        await p.save()
+    const users = await User.find()
+    await Promise.all(users.map(async u => {
+        u.password = u.name + '1234'
+        await u.save()
     }))
-
     console.log('done')
 }

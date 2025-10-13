@@ -1,6 +1,10 @@
+import dotenv from 'dotenv'
+dotenv.config();
+
 import { Hono } from "hono";
 import { Booking, Property } from "../database/db.js";
 import { CustomError, getRequiredUserData } from "../util.js"
+import getStrDistance from 'jaro-winkler'
 
 const propertyRouter = new Hono()
 
@@ -80,9 +84,10 @@ type CreatePropertyInput = {
     city: string
     state: string
     country: string
-    latitude: number
-    longitude: number
+    latitude?: number
+    longitude?: number
     image: string
+    pricePerNight: number
 }
 propertyRouter.post("/", async c => {
     const body: CreatePropertyInput = await c.req.json()
@@ -91,6 +96,8 @@ propertyRouter.post("/", async c => {
         mustHaveUserId: body.userId
     })
 
+    const [lat, lon] = await getLatLon(body)
+
     const newProperty = await Property.create({
         userId: body.userId,
         name: body.name,
@@ -98,14 +105,31 @@ propertyRouter.post("/", async c => {
         city: body.city,
         state: body.state,
         country: body.state,
-        latitude: body.latitude,
-        longitude: body.longitude,
-        image: body.image
+        latitude: lat,
+        longitude: lon,
+        image: body.image,
+        pricePerNight: body.pricePerNight,
+        availability: true
     })
 
     return c.json({
         message: "Property created",
         data: newProperty.toJSON()
+    })
+})
+
+// Delete property
+type DeletePropertyInput = {
+    propertyId: string
+    userId: string
+}
+propertyRouter.delete("/", async c => {
+    const body: DeletePropertyInput = await c.req.json()
+    await getRequiredUserData(c, { mustHaveUserId: body.userId })
+    await Property.findByIdAndDelete(body.propertyId)
+    return c.json({
+        message: "Property deleted",
+        dat: body.propertyId
     })
 })
 
@@ -137,4 +161,51 @@ const getBrowseSearchParams = (url: string): BrowseSearchParams => {
         order: parseSortOrder(sp.get('order')),
         showUnavailable: (sp.get('showUnavailable') || 'false') === 'true',
     }
+}
+
+// helper
+type GeocodingAPIResult = {
+    features?: {
+        properties?: {
+            country: string
+            city: string
+            state: string
+            lat: number
+            lon: number
+            region: string
+        }
+    }[]
+}
+const getLatLon = async (body: CreatePropertyInput): Promise<[number, number]> => {
+    const err = new CustomError({ status: 400, message: "Location not found. Check form data and try again." })
+    const url = `https://api.geoapify.com/v1/geocode/search?text=${body.name} ${body.city} ${body.state} ${body.country}&apiKey=${process.env.GEOCODING_API_KEY}`
+    const res = await fetch(url)
+    const data = await res.json() as GeocodingAPIResult
+    if (!data.features) throw err;
+    const match = data.features.find(f => {
+        if (!f.properties) return;
+        const cityIsSimilar = stringIsEmptyOrSimilar(body.city, f.properties.city)
+        const stateIsSimilar = (
+            (!f.properties.state && !f.properties.region)
+            || (stringIsEmptyOrSimilar(body.state, f.properties.state))
+            || (stringIsEmptyOrSimilar(body.state, f.properties.region))
+        )
+        const countryIsSimilar = stringIsEmptyOrSimilar(body.country, f.properties.country)
+        return (
+            cityIsSimilar
+            && stateIsSimilar
+            && countryIsSimilar
+        )
+    })
+    if (!match?.properties) throw err;
+    return [match.properties.lat, match.properties.lon]
+}
+
+
+// helper
+const stringIsEmptyOrSimilar = (str1: string | undefined, str2: string) => {
+    if (!str1) return true;
+    str1 = str1.trim().toLowerCase()
+    str2 = str2.trim().toLowerCase()
+    return (str1 === "") || (getStrDistance(str1, str2) > 0.5)
 }

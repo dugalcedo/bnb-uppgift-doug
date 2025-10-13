@@ -1,29 +1,31 @@
 import { useAppContext } from "../../context/AppContext.tsx";
-import { useBackendFetchOnFirstMount } from "../../util/backendFetch.ts"
 import dayjs from "dayjs";
+import useAdmin from "./useAdmin.ts"
 const fBooking = (str: string) => dayjs(str).format("ddd, MMM d YYYY");
 
-type AdminPanelData = {
-    properties: Property[]
-    bookings: Booking[]
-}
 
 function AdminPage() {
 
     const app = useAppContext()
-    const { data, loading, error } = useBackendFetchOnFirstMount<{}, AdminPanelData>('/api/admin')
+    const admin = useAdmin()
 
     if (!app.user?.isAdmin) return (
         <div className="responsive">Unauthorized</div>
     )
 
-    if (loading) return (
+    if (admin.loading) return (
         <div className="responsive">Loading...</div>
     )
 
-    if (error) return (
-        <div className="responsive">Error: {error}</div>
+    if (admin.error) return (
+        <div className="responsive">Error: {admin.error}</div>
     )
+
+    if (!admin.data.data) return (
+        <div className="responsive">Error: No admin data</div>
+    )
+
+    const { properties, bookings } = admin.data.data;
 
     return (
         <section className="page admin-page">
@@ -31,23 +33,23 @@ function AdminPage() {
 
             <div>
                 <h3>Properties</h3>
-                {data.data?.properties.map(p => {
+                {properties.map(p => {
                     return <div className="property" key={p._id}>
                         <h4>{p.name}</h4>
-                        <button>DELETE</button>
+                        <button onClick={() => admin.deleteProperty(p)}>DELETE</button>
                     </div>
                 })}
             </div>
 
             <div>
                 <h3>Bookings</h3>
-                {data.data?.bookings.map(b => {
-                    const p = data.data?.properties.find(p => p._id === b.propertyId)
+                {bookings.map(b => {
+                    const p = properties.find(p => p._id === b.propertyId)
                     return <div className="booking" key={b._id}>
                         <h4>{p?.name}</h4>
                         <p>Check in: {fBooking(b.checkInDate)}</p>
                         <p>Check out: {fBooking(b.checkOutDate)}</p>
-                        <button>CANCEL</button>
+                        <button onClick={() => admin.deleteBooking(b)}>CANCEL</button>
                     </div>
                 })}
             </div>

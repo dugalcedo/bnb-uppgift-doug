@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
 import { backendFetch } from "../../util/backendFetch.ts"
 import BookingForm from './BookingForm.tsx'
+import PropertyMap from './PropertyMap.tsx';
 
 const propertyMemo: Record<string, null | Property> = {};
 
@@ -65,6 +66,8 @@ function PropertyPage() {
                     </p>
                 </div>
             </div>
+
+            <PropertyMap p={property} />
 
             {/* Booking form */}
             <BookingForm p={property} />

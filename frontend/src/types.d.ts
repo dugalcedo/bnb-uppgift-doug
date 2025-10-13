@@ -6,6 +6,7 @@ type User = {
     bookings: (Booking & {
         property: Property
     })[]
+    properties: Property[]
 }
 
 type Property = {

@@ -68,7 +68,8 @@ export const getUserDocuments = async (userId: string) => {
             property: property?.toJSON()
         }
     }))
-    return { bookings: bookingsWithProperties }
+    const properties = await Property.find({ userId })
+    return { bookings: bookingsWithProperties, properties }
 }
 
 type CustomErrorInit = {
