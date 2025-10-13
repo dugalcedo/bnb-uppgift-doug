@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'; dotenv.config();
-const PORT = parseInt(process.env.PORT) || 6392;
+const PORT = parseInt(process.env.PORT||"6392") || 6392;
 
 import { Hono } from "hono";
 import { cors } from 'hono/cors';
