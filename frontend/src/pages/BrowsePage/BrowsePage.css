@@ -40,3 +40,15 @@
         gap: 1rem;
     }
 }
+
+@media (min-width: 650px) {
+    .browse-results {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1150px) {
+    .browse-results {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

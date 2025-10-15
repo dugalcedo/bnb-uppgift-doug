@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')!).render(
       <AppContextProvider>
         <BrowseContextProvider>
           <ToastContextProvider>
-            {DEV && <AppContextDebug />}
+            {/* {DEV && <AppContextDebug />} */}
             <App />
           </ToastContextProvider>
         </BrowseContextProvider>

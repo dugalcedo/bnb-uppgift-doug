@@ -1,6 +1,6 @@
 import './modal.css'
 import type { ReactNode } from "react"
-import { useState, useRef, useTransition } from "react"
+import { useState, useRef } from "react"
 
 type ModalInit = {
     component: () => ReactNode

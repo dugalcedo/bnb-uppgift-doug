@@ -84,8 +84,6 @@ type CreatePropertyInput = {
     city: string
     state: string
     country: string
-    latitude?: number
-    longitude?: number
     image: string
     pricePerNight: number
 }

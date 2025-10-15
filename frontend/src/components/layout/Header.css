@@ -1,8 +1,97 @@
-.header-mobile {
-    display: grid;
-    grid-template-columns: 50px 1fr 50px;
+nav a {
+    color: white;
+    text-decoration: none;
+}
 
-    & > .middle {
-        text-align: center;
+.header-container {
+    background-color: var(--magenta);
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+}
+
+.header-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & .dropdown {
+        position: relative;
+
+        & > button {
+            font-size: 1.5rem;
+            height: 50px;
+            background-color: transparent;
+            border: 0;
+            color: white;
+        }
+
+        & .menu {
+            max-height: 0px;
+            transition: max-height .5s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--magenta);
+            z-index: 100;
+
+            &.open {
+                max-height: 500px;
+            }
+
+            & > * {
+                padding: .7rem 1.5rem;
+                min-width: 200px;
+                text-align: right;
+                border: 0;
+                background-color: transparent;
+                font-size: 1rem;
+                color: white;
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                }
+            }
+        }
+    }
+
+}
+
+.header-desktop {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+
+    & nav {
+        display: flex;
+        align-items: flex-end;
+
+        & > * {
+            background-color: transparent;
+            color: white;
+            border: 0;
+            font-size: 1rem;
+            padding: 2rem 1.2rem;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+}
+
+@media (min-width: 600px) {
+    .header-container {
+        padding: 0;
+    }
+
+    .header-mobile {
+        display: none;
+    }
+
+    .header-desktop {
+        display: flex;
     }
 }
