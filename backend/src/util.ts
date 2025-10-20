@@ -63,8 +63,10 @@ export const getUserDocuments = async (userId: string) => {
     const bookings = await Booking.find({ userId })
     const bookingsWithProperties = await Promise.all(bookings.map(async booking => {
         const property = await Property.findOne({ _id: booking.propertyId })
+        const bookingObj = booking.toObject({ virtuals: true })
         return {
-            ...booking.toJSON(),
+            ...bookingObj,
+            totalPrice: bookingObj.numberOfNights * (property?.pricePerNight||-1),
             property: property?.toJSON()
         }
     }))

@@ -7,7 +7,7 @@ export interface BookingDocInterface {
     userId: Types.ObjectId
     propertyId: Types.ObjectId
     // virtuals
-    totalPrice: number
+    totalPrice: () => Promise<number>
     numberOfNights: number
 }
 

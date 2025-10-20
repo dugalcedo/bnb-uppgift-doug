@@ -61,4 +61,6 @@ type Booking = {
     userId: string
     checkInDate: string
     checkOutDate: string
+    numberOfNights: number
+    totalPrice: number
 }

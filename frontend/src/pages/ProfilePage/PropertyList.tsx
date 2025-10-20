@@ -27,13 +27,21 @@ function PropertyList({ user }: PropertyListProps) {
     return (
         <ul className="property-list">
             {user.properties.map(p => {
-                return <li key={p._id}>
-                    <h3>{p.name}</h3>
-                    <p>{p.city}, {p.state}, {p.country}</p>
-                    <p>{p.latitude} / {p.longitude}</p>
-                    <div className="controls">
-                        <button className="del" onClick={() => handleDelete(p)}>Delete</button>
-                        <button className="edit">Edit</button>
+                const shortDesc = p.description.length <= 50 ? p.description : (p.description.slice(0, 50) + '...')
+
+                return <li key={p._id} className="property-list-item">
+                    <div className="img-info">
+                        <img src={p.image} />
+                        <div className="info">
+                            <h3>{p.name}</h3>
+                            <p className="desc">{shortDesc}</p>
+                            <p>{p.city}, {p.state}, {p.country}</p>
+                            <p className="price">${p.pricePerNight}</p>
+                            <div className="controls">
+                                <button className="del" onClick={() => handleDelete(p)}>Delete</button>
+                                <button className="edit">Edit</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
             })}

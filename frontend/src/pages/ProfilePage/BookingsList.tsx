@@ -29,15 +29,25 @@ function BookingsList({ user }: { user: User }) {
                 const checkInD = dayjs(booking.checkInDate)
                 const checkOutD = dayjs(booking.checkOutDate)
                 const f = (d: Dayjs) => d.format("ddd, MMM d YYYY")
-                const numberOfNights = checkOutD.diff(checkInD, 'day')
 
                 return (
                     <li key={booking._id}>
                         <h3 className="title">{booking.property.name}</h3>
                         <div className="dates">
-                            <p>{numberOfNights} nights</p>
-                            <p>Check in: {f(checkInD)}</p>
-                            <p>Check out: {f(checkOutD)}</p>
+                            <div className="nn-tp">
+                                <p className="nn">{booking.numberOfNights} nights</p>
+                                <p className="tp">${booking.totalPrice}</p>
+                            </div>
+                            <div className="check-in-out">
+                                <div>
+                                    <p>Check-in</p>
+                                    <p>{f(checkInD)}</p>
+                                </div>
+                                <div>
+                                    <p>Check-out</p>
+                                    <p>{f(checkOutD)}</p>
+                                </div>
+                            </div>
                         </div>
                         <div className="controls">
                             <button className="del" onClick={() => unbook(booking._id)}>

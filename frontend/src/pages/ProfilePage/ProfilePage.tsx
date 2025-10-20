@@ -27,8 +27,14 @@ function ProfilePage() {
             </div>
 
             <div className="properties">
-                <h2>Your properties</h2>
-                <button className='add-property-btn' onClick={addPropertyModal.open}>Add property</button>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                }}>
+                    <h2>Your properties</h2>
+                    <button className='add-property-btn' onClick={addPropertyModal.open}>Add property</button>
+                </div>
                 <addPropertyModal.component />
                 {!app.user.properties.length ? (
                     <p>You don't have any properties.</p>
