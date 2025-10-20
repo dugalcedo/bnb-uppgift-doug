@@ -131,6 +131,49 @@ propertyRouter.delete("/", async c => {
     })
 })
 
+// Edit property
+type EditPropertyInput = {
+    userId: string
+    propertyId: string
+    name: string
+    description: string
+    city: string
+    state: string
+    country: string
+    image: string
+    pricePerNight: number
+}
+propertyRouter.put("/", async c => {
+    const body: EditPropertyInput = await c.req.json()
+    const user = await getRequiredUserData(c, { mustHaveUserId: body.userId })
+
+    const property = await Property.findById(body.propertyId)
+    if (!property) throw new CustomError({ status: 404, message: "Property not found" })
+
+    // validate user is owner of property
+    if (!user.isAdmin && (property.userId.toString() !== body.userId)) {
+        throw new CustomError({ status: 401, message: "You are not allowed to edit this property" })
+    }
+
+    const [lat, lon] = await getLatLon(body)
+
+    property.name = body.name
+    property.city = body.city
+    property.state = body.state
+    property.country = body.country
+    property.image = body.image
+    property.description = body.description
+    property.pricePerNight = body.pricePerNight
+    property.latitude = lat
+    property.longitude = lon
+
+    await property.save()
+
+    return c.json({
+        message: "Property updated"
+    })
+})
+
 export default propertyRouter
 
 // helper

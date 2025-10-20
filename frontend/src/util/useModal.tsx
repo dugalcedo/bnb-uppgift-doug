@@ -2,11 +2,11 @@ import './modal.css'
 import type { ReactNode } from "react"
 import { useState, useRef } from "react"
 
-type ModalInit = {
-    component: () => ReactNode
+type ModalInit<PropType extends Record<string, any> = {}> = {
+    component: (props: PropType) => ReactNode
 }
 
-export default function useModal(modalInit: ModalInit) {
+export default function useModal<PropType extends Record<string, any> = {}>(modalInit: ModalInit<PropType>) {
 
     const busyRef = useRef(false)
     const backdropRef = useRef<HTMLDivElement>(null)
@@ -62,7 +62,7 @@ export default function useModal(modalInit: ModalInit) {
         }, 260);
     })
 
-    const component = () => {
+    const component = (props: PropType) => {
 
         if (!active) return <></>
 
@@ -73,7 +73,8 @@ export default function useModal(modalInit: ModalInit) {
             }}>
                 <div className="modal-window" style={{transform: "scale(0)"}} ref={windowRef}>
                     <button className="modal-x" onClick={close}>&times;</button>
-                    {modalInit.component()}
+                    {/* I'm trying to pass the props into this component */}
+                    {modalInit.component(props)}
                 </div>
             </div>
         )

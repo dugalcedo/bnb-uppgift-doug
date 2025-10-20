@@ -40,7 +40,8 @@ function LeafletMap({ lat, lon, zoom = 13 }: LeafletMapProps) {
             width: "100%",
             maxHeight: "400px",
             overflow: "hidden",
-            borderRadius: "1rem"
+            borderRadius: "1rem",
+            zIndex: 100
         }}></div>
     )
 }
