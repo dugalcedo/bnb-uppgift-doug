@@ -39,9 +39,11 @@ function BookingsList({ user }: { user: User }) {
                             <p>Check in: {f(checkInD)}</p>
                             <p>Check out: {f(checkOutD)}</p>
                         </div>
-                        <button className="del" onClick={() => unbook(booking._id)}>
-                            Unbook
-                        </button>
+                        <div className="controls">
+                            <button className="del" onClick={() => unbook(booking._id)}>
+                                Unbook
+                            </button>
+                        </div>
                     </li>
                 )
             })}

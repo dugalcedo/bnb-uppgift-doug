@@ -1,5 +1,6 @@
 import Header from "./components/layout/Header.tsx"
 import Footer from "./components/layout/Footer.tsx"
+import Background from "./components/layout/Background.tsx"
 import { Routes, Route } from "react-router-dom"
 
 // Pages
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <>
+      <Background />
       <Header />
       <main className="responsive">
         <Routes>

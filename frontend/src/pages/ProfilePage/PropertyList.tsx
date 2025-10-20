@@ -31,7 +31,10 @@ function PropertyList({ user }: PropertyListProps) {
                     <h3>{p.name}</h3>
                     <p>{p.city}, {p.state}, {p.country}</p>
                     <p>{p.latitude} / {p.longitude}</p>
-                    <button onClick={() => handleDelete(p)}>Delete</button>
+                    <div className="controls">
+                        <button className="del" onClick={() => handleDelete(p)}>Delete</button>
+                        <button className="edit">Edit</button>
+                    </div>
                 </li>
             })}
         </ul>

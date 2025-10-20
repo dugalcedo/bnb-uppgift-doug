@@ -5,8 +5,27 @@ nav a {
 
 .header-container {
     background-color: var(--magenta);
+    border-top: 10px solid rgba(0, 0, 0, 0.4);
     margin-bottom: 2rem;
     padding: 1rem 0;
+    position: fixed;
+    width: 100dvw;
+    z-index: 500;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+header .logo img {
+    width: 40px;
+}
+
+header .left p {
+    font-size: .8rem;
+    font-style: italic;
 }
 
 .header-mobile {

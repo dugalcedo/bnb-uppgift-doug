@@ -37,9 +37,10 @@ function LeafletMap({ lat, lon, zoom = 13 }: LeafletMapProps) {
     return (
         <div className="map" ref={mapRef} style={{
             aspectRatio: "1",
-            maxWidth: "calc(100% - 40px)",
+            width: "100%",
             maxHeight: "400px",
-            overflow: "hidden"
+            overflow: "hidden",
+            borderRadius: "1rem"
         }}></div>
     )
 }

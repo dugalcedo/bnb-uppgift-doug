@@ -8,6 +8,9 @@ type CalendarInit = {
     property?: Property
 }
 
+const today = dayjs()
+const todayF = today.format('YYYY-MM-DD')
+
 export default function useCalendar(init: CalendarInit) {
 
     // State, primitive values only! That's why they are strings.
@@ -87,9 +90,13 @@ export default function useCalendar(init: CalendarInit) {
                     {displayedDateRange}
                 </div>
                 <div className="calendar-date-display">
-                    <button onClick={monthBackward}>PREV</button>
+                    <button onClick={monthBackward}>
+                        <img src="/icons/arr-left.svg" alt="left arrow" />
+                    </button>
                     <span>{focusDateD.format('MMMM YYYY')}</span>
-                    <button onClick={monthForward}>NEXT</button>
+                    <button onClick={monthForward}>
+                        <img src="/icons/arr-right.svg" alt="right arrow" />
+                    </button>
                 </div>
                 <div className="calendar">
                     {daysOfWeek.map(d => {
@@ -99,6 +106,7 @@ export default function useCalendar(init: CalendarInit) {
                         const formatted = date.format('YYYY-MM-DD')
                         const isBooked = bookedDateSet.has(formatted)
                         const isSelected = selectedDateSet.has(formatted)
+                        const isToday = todayF === formatted
                         
                         // Conditional classes
                         let className = "date"
@@ -116,6 +124,9 @@ export default function useCalendar(init: CalendarInit) {
                                 <div className="number">{date.date()}</div>
                                 {isBooked && (
                                     <span className="booked">&times;</span>
+                                )}
+                                {isToday && (
+                                    <span className="today">TODAY</span>
                                 )}
                             </button>
                         )

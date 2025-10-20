@@ -2,15 +2,79 @@
     display: grid;
     grid-template-columns: 1fr;
 
-    & > .image {
-        & img {
-            width: 100%;
+    & > .image-info {
+
+        & .info-text {
+            padding: 2rem 0;
+
+            & .price {
+                font-size: 3rem;
+            }
+
+            & .location {
+                font-size: 1.5rem;
+                font-style: italic;
+                margin: 1rem 0;
+            }
+
+            & .description {
+                font-size: .9rem;
+            }
+        }
+
+        @media (min-width: 600px) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+
+            & > .image {
+                & img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        @media (min-width: 1000px) {
+            grid-template-columns: 1fr 2fr;
+
+            & > .info {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        & > .image {
+            & img {
+                width: 100%;
+                border-radius: 1rem;
+                margin-top: 1rem;
+            }
         }
     }
+
 }
 
 .booking-form-wrapper {
-    background-color: rgba(255, 255, 255, 0.1);
     padding: 4px;
+    margin-top: 2rem;
 }
 
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.5rem;
+
+    & button {
+        font-size: 1.5rem;
+        border: 0;
+        background-color: green;
+        color: white;
+        border-radius: 5rem;
+        padding: .5rem 1rem;
+    }
+}

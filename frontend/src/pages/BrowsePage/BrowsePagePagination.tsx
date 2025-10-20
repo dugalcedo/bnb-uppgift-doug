@@ -17,13 +17,17 @@ function BrowsePagePagination() {
             <div className="controls">
                 <div>
                     {b.currentPage > 1 && (
-                        <button onClick={pageBack}>BACK</button>
+                        <button onClick={pageBack}>
+                            <img src="/icons/arr-left.svg" alt="left arrow" />
+                        </button>
                     )}
                 </div>
                 <p>Page {b.currentPage} of {b.totalPages}</p>
                 <div>
                     {b.currentPage < b.totalPages && (
-                        <button onClick={pageForward}>NEXT</button>
+                        <button onClick={pageForward}>
+                            <img src="/icons/arr-right.svg" alt="right arrow" />
+                        </button>
                     )}
                 </div>
             </div>

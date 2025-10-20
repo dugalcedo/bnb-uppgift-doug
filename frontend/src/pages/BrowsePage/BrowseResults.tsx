@@ -34,16 +34,18 @@ function BrowseResult({ p }: { p: Property }) {
             </div>
             <div className="info">
                 <h3>{p.name}</h3>
-                <p className="price">
-                    ${p.pricePerNight} &nbsp;
-                    <small>/night</small>
-                </p>
-                <p className="location">
-                    {p.city}, {p.state}
-                </p>
-                <p className="desc">
-                    {p.description}
-                </p>
+                <div className="info-info">
+                    <p className="price">
+                        ${p.pricePerNight} &nbsp;
+                        <small>/night</small>
+                    </p>
+                    <p className="location">
+                        {p.city}, {p.state}
+                    </p>
+                    <p className="desc">
+                        {p.description}
+                    </p>
+                </div>
             </div>
         </Link>
     )

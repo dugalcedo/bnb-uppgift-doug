@@ -8,7 +8,7 @@ function BrowsePage() {
 
     return (
         <section className="browse-page responsive">
-            <h2>Browse page</h2>
+            <h2 style={{ textAlign: 'center', marginBottom: "2rem" }}>Browse properties</h2>
             <BrowsePageFilter />
             <BrowsePagePagination />
             <BrowseResults />

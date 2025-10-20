@@ -50,24 +50,28 @@ function PropertyPage() {
             {/* Property info */}
             <div className="property">
                 <h2>{property.name}</h2>
-                <div className="image">
-                    <img src={property.image} alt={property.name} />
-                </div>
-                <div className="info">
-                    <p className="price">
-                        ${property.pricePerNight} &nbsp;
-                        <small>/night</small>
-                    </p>
-                    <p className="location">
-                        {property.city}, {property.state}
-                    </p>
-                    <p className="description">
-                        {property.description}
-                    </p>
+                <div className="image-info">
+                    <div className="image">
+                        <img src={property.image} alt={property.name} />
+                    </div>
+                    <div className="info">
+                        <div className="info-text">
+                            <p className="price">
+                                ${property.pricePerNight} &nbsp;
+                                <small>/night</small>
+                            </p>
+                            <p className="location">
+                                {property.city}, {property.state}
+                            </p>
+                            <p className="description">
+                                {property.description}
+                            </p>
+                        </div>
+                        <PropertyMap p={property} />
+                    </div>
                 </div>
             </div>
 
-            <PropertyMap p={property} />
 
             {/* Booking form */}
             <BookingForm p={property} />

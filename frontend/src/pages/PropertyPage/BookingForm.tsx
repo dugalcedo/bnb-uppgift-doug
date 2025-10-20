@@ -58,11 +58,13 @@ function BookingForm({ p }: { p: Property }) {
                 <p>Invalid date range: contains booked days.</p>
             )}
             <cal.Component />
-            <p>{cal.selectionLength} nights selected</p>
-            <p>Cost: ${cal.selectionPrice}</p>
-            <button onClick={handleBook} disabled={submittingForm}>
-                Book stay
-            </button>
+            <div className="book-info">
+                <p>{cal.selectionLength} nights selected</p>
+                <p>Cost: ${cal.selectionPrice}</p>
+                <button onClick={handleBook} disabled={submittingForm}>
+                    Book stay
+                </button>
+            </div>
         </div>
     )
 }

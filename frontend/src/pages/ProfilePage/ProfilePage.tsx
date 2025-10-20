@@ -1,3 +1,4 @@
+import './ProfilePage.css'
 import { useAppContext } from "../../context/AppContext.tsx";
 import BookingsList from "./BookingsList.tsx";
 import PropertyList from "./PropertyList.tsx"
@@ -27,7 +28,7 @@ function ProfilePage() {
 
             <div className="properties">
                 <h2>Your properties</h2>
-                <button onClick={addPropertyModal.open}>Add property</button>
+                <button className='add-property-btn' onClick={addPropertyModal.open}>Add property</button>
                 <addPropertyModal.component />
                 {!app.user.properties.length ? (
                     <p>You don't have any properties.</p>
