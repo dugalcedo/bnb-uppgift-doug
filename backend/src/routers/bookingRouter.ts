@@ -3,6 +3,7 @@ import { Booking, BookingType, Property } from "../database/db.js"
 import { CustomError, getRequiredUserData } from "../util.js"
 import dayjs from "dayjs";
 import { dateRangeToSet, bookingDatesToSet, dateSetDoesOverlap } from "../util/dateUtils.js";
+import { isBookingStatus } from "../database/types/Booking.js"
 
 const bookingRouter = new Hono()
 
@@ -59,6 +60,7 @@ bookingRouter.post("/", async c => {
     })
 })
 
+// Delete
 type DeleteBookingInput = {
     bookingId: string
     userId: string
@@ -74,6 +76,71 @@ bookingRouter.delete("/", async c => {
     return c.json({
         message: "Booking deleted",
         data: body.bookingId
+    })
+})
+
+
+// Get by propertyId
+bookingRouter.get("/byPropertyId/:id", async c => {
+    const id = c.req.param('id')
+    const property = await Property.findById(id)
+
+    if (!property) throw new CustomError({
+        status: 404,
+        message: "Property not found"
+    })
+
+    const bookings = await Booking.find({ propertyId: id })
+    return c.json({
+        message: "Searched",
+        data: await Promise.all(bookings.map(async b => {
+            const bookingObj = b.toObject({ virtuals: true })
+            return {
+                ...bookingObj,
+                totalPrice: bookingObj.numberOfNights * property.pricePerNight
+            }
+        })),
+    })
+})
+
+// Update booking status
+type UpdateBookingStatusInput = {
+    bookingId: string
+    status: string
+}
+bookingRouter.put("/updateStatus", async c => {
+    const body: UpdateBookingStatusInput = await c.req.json()
+
+    if (!isBookingStatus(body.status)) {
+        throw new CustomError({
+            status: 400,
+            message: "Invalid status"
+        })
+    }
+
+    const booking = await Booking.findById(body.bookingId)
+
+    if (!booking) throw new CustomError({
+        status: 404,
+        message: "Booking not found"
+    })
+
+    const property = await Property.findById(booking.propertyId)
+
+    if (!property) throw new CustomError({
+        status: 404,
+        message: "Booking found but property not found"
+    })
+
+    await getRequiredUserData(c, {
+        mustHaveUserId: property.userId.toString()
+    })
+
+    booking.status = body.status
+    await booking.save()
+
+    return c.json({
+        message: "Booking updated"
     })
 })
 

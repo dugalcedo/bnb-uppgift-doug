@@ -15,11 +15,13 @@ function BookingForm({ p }: { p: Property }) {
         startFormTransition(async () => {
             if (!app.user) {
                 console.error("NOT LOGGED IN")
+                toast.openToast("You must be logged in to book", "maroon")
                 return
             }
 
             if (!cal.startDate || !cal.endDate) {
                 console.error("INVALID DATE RANGE")
+                toast.openToast("Invalid date range", "maroon")
                 return
             }
 

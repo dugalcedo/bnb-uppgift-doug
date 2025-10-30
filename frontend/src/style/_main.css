@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap');
 
 :root {
     --magenta: #b63480;
@@ -18,8 +19,15 @@ body {
     color: white;
 }
 
+#root {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
 main {
     padding-top: 10rem;
+    flex-grow: 1;
 }
 
 /* Font */

@@ -71,7 +71,16 @@ export const getUserDocuments = async (userId: string) => {
         }
     }))
     const properties = await Property.find({ userId })
-    return { bookings: bookingsWithProperties, properties }
+    return { 
+        bookings: bookingsWithProperties, 
+        properties: await Promise.all(properties.map(async p => {
+            const bookingCount = await Booking.countDocuments({ propertyId: p._id })
+            return {
+                ...p.toJSON(),
+                bookingCount
+            }
+        }))
+    }
 }
 
 type CustomErrorInit = {

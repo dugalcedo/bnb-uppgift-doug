@@ -20,6 +20,12 @@ const bookingSchema = new Schema<BookingDocInterface>({
         type: Schema.Types.ObjectId,
         ref: 'property',
         required: true
+    },
+    status: {
+        type: String,
+        required: true,
+        default: 'pending',
+        enum: ['pending', 'rejected', 'accepted']
     }
 }, {
     timestamps: true,

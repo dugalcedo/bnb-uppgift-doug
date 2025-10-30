@@ -11,6 +11,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage.tsx"
 import PropertyPage from "./pages/PropertyPage/PropertyPage.tsx"
 import ProfilePage from "./pages/ProfilePage/ProfilePage.tsx"
 import AdminPage from "./pages/AdminPage/AdminPage.tsx"
+import ManagePage from "./pages/ManagePage/ManagePage.tsx"
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
     <>
       <Background />
       <Header />
-      <main className="responsive">
+      <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/auth" element={<AuthPage />} />
@@ -26,6 +27,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/property/:id" element={<PropertyPage />} />
+          <Route path="/manage/:id" element={<ManagePage />} />
           <Route path="/:fel" element={<NotFoundPage />} />
         </Routes>
       </main>

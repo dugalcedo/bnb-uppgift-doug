@@ -24,6 +24,7 @@ type Property = {
     bookings?: Booking[]
     userId: string
     user?: User
+    bookingCount?: number
 }
 
 type PropertyBrowseResult = {
@@ -63,4 +64,5 @@ type Booking = {
     checkOutDate: string
     numberOfNights: number
     totalPrice: number
+    status: 'pending' | 'accepted' | 'rejected'
 }

@@ -8,7 +8,11 @@
     "dev:npm": "npx concurrently --names back,front 'npx tsx --watch backend/src/server.ts' 'cd frontend && npm run dev'",
     "build": "pnpm i && cd frontend && pnpm i && pnpm run build && cd ../backend && pnpm --package=typescript dlx tsc",
     "build:npm": "npm i && cd frontend && npm i && npm run build && cd ../backend && tsc",
-    "start": "node backend/dist/server"
+    "dev:bun": "bun x concurrently --names back-front 'bun --watch run backend/src/server' 'cd frontend && bun run --bun dev'",
+    "start": "node backend/dist/server",
+    "install-full": "pnpm i && cd frontend && pnpm i && cd ../backend && pnpm i && cd ..",
+    "install-full:npm": "npm i && cd frontend && npm i && cd ../backend && npm i && cd ..",
+    "install-full:bun": "bun i && cd frontend && bun i && cd ../backend && bun i && cd .."
   },
   "author": "",
   "license": "ISC",

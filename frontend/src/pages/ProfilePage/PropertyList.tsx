@@ -2,9 +2,9 @@ import FormField from "../../components/util/FormField.tsx"
 import LoadingWheel from "../../components/util/LoadingWheel.tsx"
 import { useToastContext } from "../../context/ToastContext.tsx"
 import { backendFetch } from "../../util/backendFetch.ts"
-import useLocalStorage from "../../util/useLocalStorage.ts"
 import useModal from "../../util/useModal.tsx"
 import { useState, useTransition, type FormEventHandler } from "react"
+import { Link } from "react-router-dom"
 
 type PropertyListProps = {
     user: User
@@ -60,6 +60,11 @@ function PropertyList({ user }: PropertyListProps) {
                                 <div className="controls">
                                     <button className="del" onClick={() => handleDelete(p)}>Delete</button>
                                     <button className="edit" onClick={() => handleEdit(p)}>Edit</button>
+                                    {(p.bookingCount||0) > 0 && (
+                                        <Link to={`/manage/${p._id}`}>
+                                            <button className="manage">Manage bookings</button>
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,38 @@
+.home-page {
+    margin-top: -5rem;
+}
+
+.home-page .hero {
+    min-height: 650px;
+    position: relative;
+}
+
+.home-page .hero .inner {
+    & .title {
+         & .big {
+            font-size: 4rem;
+            font-weight: bolder;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 8);
+         }
+
+         & .cursive {
+            font-family: "Rouge Script", cursive;
+            font-size: 5rem;
+            letter-spacing: 1rem;
+            font-weight: 900;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 8);
+
+         }
+    }
+
+    & .text {
+        background-color: white;
+        display: inline-block;
+        color: #333;
+        padding: 1rem;
+        border-radius: 1rem 2rem;
+        border: 4px solid var(--magenta);
+        border-top: 0;
+        border-left: 0;
+    }
+}

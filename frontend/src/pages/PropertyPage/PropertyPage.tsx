@@ -45,7 +45,7 @@ function PropertyPage() {
     }
 
     return (
-        <section className="property-page">
+        <section className="property-page page responsive">
 
             {/* Property info */}
             <div className="property">

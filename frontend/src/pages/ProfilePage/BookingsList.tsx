@@ -49,6 +49,9 @@ function BookingsList({ user }: { user: User }) {
                                 </div>
                             </div>
                         </div>
+                        <div className="status">
+                            STATUS: {booking.status}
+                        </div>
                         <div className="controls">
                             <button className="del" onClick={() => unbook(booking._id)}>
                                 Unbook

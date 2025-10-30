@@ -1,3 +1,5 @@
+import './AdminPage.css'
+
 import { useAppContext } from "../../context/AppContext.tsx";
 import dayjs from "dayjs";
 import useAdmin from "./useAdmin.ts"
@@ -28,30 +30,31 @@ function AdminPage() {
     const { properties, bookings } = admin.data.data;
 
     return (
-        <section className="page admin-page">
+        <section className="page admin-page responsive">
             <h2>Admin panel</h2>
 
-            <div>
-                <h3>Properties</h3>
-                {properties.map(p => {
-                    return <div className="property" key={p._id}>
-                        <h4>{p.name}</h4>
-                        <button onClick={() => admin.deleteProperty(p)}>DELETE</button>
-                    </div>
-                })}
-            </div>
-
-            <div>
-                <h3>Bookings</h3>
-                {bookings.map(b => {
-                    const p = properties.find(p => p._id === b.propertyId)
-                    return <div className="booking" key={b._id}>
-                        <h4>{p?.name}</h4>
-                        <p>Check in: {fBooking(b.checkInDate)}</p>
-                        <p>Check out: {fBooking(b.checkOutDate)}</p>
-                        <button onClick={() => admin.deleteBooking(b)}>CANCEL</button>
-                    </div>
-                })}
+            <div className="grid">
+                <div>
+                    <h3>Properties</h3>
+                    {properties.map(p => {
+                        return <div className="property" key={p._id}>
+                            <h4>{p.name}</h4>
+                            <button onClick={() => admin.deleteProperty(p)}>DELETE</button>
+                        </div>
+                    })}
+                </div>
+                <div>
+                    <h3>Bookings</h3>
+                    {bookings.map(b => {
+                        const p = properties.find(p => p._id === b.propertyId)
+                        return <div className="booking" key={b._id}>
+                            <h4>{p?.name}</h4>
+                            <p>Check in: {fBooking(b.checkInDate)}</p>
+                            <p>Check out: {fBooking(b.checkOutDate)}</p>
+                            <button onClick={() => admin.deleteBooking(b)}>CANCEL</button>
+                        </div>
+                    })}
+                </div>
             </div>
 
         </section>
