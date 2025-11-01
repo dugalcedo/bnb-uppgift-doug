@@ -8,7 +8,7 @@ function AuthPage() {
     const [signingUp, setSigningUp] = useState(true)
 
     return (
-        <section className="auth-page">
+        <section className="auth-page page responsive">
             <h3>{signingUp ? 'Sign up' : 'Log in'}</h3>
             <div className="toggle">
                 <button onClick={() => setSigningUp(true)} className={`${signingUp ? 'selected' : ''}`}>Sign up</button>

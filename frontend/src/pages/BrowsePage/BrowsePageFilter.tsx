@@ -68,13 +68,13 @@ function BrowsePageFilter() {
                     <option value="price_desc">Price (descending)</option>
                 </select>
             </FormField>
-            <FormField label="Show unavailable properties">
+            {/* <FormField label="Show unavailable properties">
                 <input 
                     type="checkbox" 
                     defaultChecked={formData.showUnavailable} 
                     onChange={e => setFormData(d => ({...d, showUnavailable: e.target.checked }))} 
                 />
-            </FormField>
+            </FormField> */}
             <button>Update</button>
         </form>
     )

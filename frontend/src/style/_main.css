@@ -95,7 +95,7 @@ form {
     & .field {
         margin-bottom: 1rem;
 
-        & > *:last-child {
+        & > .input-container {
             display: flex;
             flex-direction: column;
             & input, select, option, textarea {

@@ -43,7 +43,6 @@ function SignUpForm() {
 
             <button disabled={!valid}>Sign up</button>
             {formError && <span className="error">{formError}</span>}
-            {!valid && <span>!</span>}
         </form>
     )
 }
