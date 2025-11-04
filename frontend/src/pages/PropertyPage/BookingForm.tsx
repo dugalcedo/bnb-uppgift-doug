@@ -43,7 +43,8 @@ function BookingForm({ p }: { p: Property }) {
                 return
             }
 
-            alert("Booked")
+            toast.openToast("Your booking reuqest is now pending approval!", "green")
+            await new Promise(r => setTimeout(r, 3000))
             window.location.href = "/"
         })
     }
